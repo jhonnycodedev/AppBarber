@@ -11,15 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.appbarber.components.MenuInferior
 import com.example.appbarber.components.MenuSuperior
 
 @Composable
-fun TelaConta(state: DrawerState){
+fun TelaConta(state: DrawerState, navController: NavController){
     Scaffold(
         topBar = { MenuSuperior(state) },
         content = { p -> ConteudoDaPaginaConta(Modifier.padding(p)) },
-        bottomBar = { MenuInferior(state) }
+        bottomBar = { MenuInferior(state, navController) }
     )
 }
 

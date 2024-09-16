@@ -11,17 +11,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.appbarber.components.MenuInferior
 import com.example.appbarber.components.MenuSuperior
 
 @Composable
-fun TelaQuatro(state: DrawerState) {
+fun TelaQuatro(state: DrawerState, navController: NavController) {
     Scaffold(
         topBar = { MenuSuperior(state) },
         content = { innerPadding ->
             ConteudoDaPaginaQuatro(Modifier.padding(innerPadding))
         },
-        bottomBar = { MenuInferior(state) }
+        bottomBar = { MenuInferior(state, navController) }
     )
 }
 

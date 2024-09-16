@@ -20,17 +20,17 @@ import com.example.appbarber.components.MenuInferior
 import com.example.appbarber.components.MenuSuperior
 
 @Composable
-fun SearchApp(state: DrawerState, navController: NavController) {
+fun TelaAgendamento(state: DrawerState, navController: NavController) {
     Scaffold(
         content = { innerPadding ->
-            ConteudoDaPaginaSearch(Modifier.padding(innerPadding))
+            ConteudoDaPaginaAgendamento(Modifier.padding(innerPadding))
         },
         bottomBar = { MenuInferior(state, navController) }
     )
 }
 
 @Composable
-fun ConteudoDaPaginaSearch(modifier: Modifier) {
+fun ConteudoDaPaginaAgendamento(modifier: Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -83,7 +83,7 @@ fun ConteudoDaPaginaSearch(modifier: Modifier) {
         }
     }
 }
-
+/*
 @Composable
 fun ClassificationButton(text: String, icon: ImageVector) {
     Button(
@@ -103,3 +103,4 @@ fun ClassificationButton(text: String, icon: ImageVector) {
         Text(text)
     }
 }
+*/
