@@ -1,97 +1,102 @@
 package com.example.appbarber.components
-
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material3.Icon
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.DrawerState
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.ui.graphics.Color
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.appbarber.R
-import com.example.appbarber.screens.BarberAppRotas
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-
+import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.appbarber.screens.TelaRotasBottom
 
 @Composable
-fun MenuInferior(state: DrawerState, navController: NavController) {
-    BottomAppBar(
-        containerColor = colorResource(id = R.color.principal),
-        contentColor = Color.White
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.weight(5f)
-        ) {
-            // Ícone Home
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+fun MenuInferior(navController: NavController) {
+    // Obtém a navegação atual
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    NavigationBar {
+        NavigationBarItem(
+            selected = currentRoute == TelaRotasBottom.TelaMenuA,
+            onClick = {
+                navController.navigate(TelaRotasBottom.TelaMenuA) {
+                    // Use popUpTo e launchSingleTop para evitar múltiplas instâncias
+                    popUpTo(TelaRotasBottom.TelaMenuA) { inclusive = true }
+                    launchSingleTop = true
+                }
+            },
+            icon = {
                 Icon(
                     imageVector = Icons.Filled.Home,
                     contentDescription = "Inicio",
-                    modifier = Modifier.size(40.dp),
-                    tint = Color.White
-                )
-                Text(
-                    text = "Início",
-                    fontSize = 12.sp,
-                    color = colorResource(id = R.color.bottonbar)
+                    modifier = Modifier.size(40.dp)
                 )
             }
-
-            Spacer(modifier = Modifier.width(60.dp))
-
-            // Ícone Search com comportamento clicável
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        )
+        NavigationBarItem(
+            selected = currentRoute == TelaRotasBottom.TelaMenuB,
+            onClick = {
+                navController.navigate(TelaRotasBottom.TelaMenuB) {
+                    popUpTo(TelaRotasBottom.TelaMenuB) { inclusive = true }
+                    launchSingleTop = true
+                }
+            },
+            icon = {
                 Icon(
-
                     imageVector = Icons.Filled.Search,
-                    contentDescription = "Buscar",
-                    modifier = Modifier.size(40.dp),
-                    tint = Color.White,
-
-                )
-                Text(
-                    text = "Buscar",
-                    fontSize = 12.sp,
-                    color = colorResource(id = R.color.bottonbar)
+                    contentDescription = "Pesquisar",
+                    modifier = Modifier.size(40.dp)
                 )
             }
-
-            Spacer(modifier = Modifier.width(50.dp))
-
-            // Ícone Agendamentos
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        )
+        NavigationBarItem(
+            selected = currentRoute == TelaRotasBottom.TelaMenuC,
+            onClick = { navController.navigate(TelaRotasBottom.TelaMenuC) },
+            icon = {
                 Icon(
-                    imageVector = Icons.Filled.DateRange,
-                    contentDescription = "Agendamentos",
-                    modifier = Modifier.size(40.dp),
-                    tint = Color.White
-                )
-                Text(
-                    text = "Agendamento",
-                    fontSize = 12.sp,
-                    color = colorResource(id = R.color.bottonbar)
+                    imageVector = Icons.Filled.CalendarMonth,
+                    contentDescription = "Calendário",
+                    modifier = Modifier.size(40.dp)
                 )
             }
-        }
+        )
     }
 }
 
+
+@Composable
+fun BarberBottomBar(){
+    BottomAppBar(
+        containerColor = Color(0x52196F3)
+    ) {
+        Row (
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Icon(imageVector = Icons.Filled.Home,
+                contentDescription = "d",
+                modifier = Modifier.size(40.dp))
+            Spacer(modifier = Modifier.width(50.dp))
+            Icon(imageVector = Icons.Filled.Search,
+                contentDescription = "e",
+                modifier = Modifier.size(40.dp))
+            Spacer(modifier = Modifier.width(50.dp))
+            Icon(imageVector = Icons.Filled.CalendarMonth,
+                contentDescription = "c",
+                modifier = Modifier.size(40.dp))
+        }
+    }
+}

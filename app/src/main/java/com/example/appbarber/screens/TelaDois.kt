@@ -1,37 +1,36 @@
 package com.example.appbarber.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DrawerState
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.appbarber.components.BarberBottomBar
 import com.example.appbarber.components.MenuInferior
 import com.example.appbarber.components.MenuSuperior
 
-
 @Composable
+fun TelaDois(state: DrawerState) {
 
-fun TelaDois(state: DrawerState, navController : NavController){
+    val navController = rememberNavController()
     Scaffold(
         topBar = { MenuSuperior(state) },
         content = { p -> ConteudoDaPaginaDois(Modifier.padding(p)) },
-        bottomBar = { MenuInferior(state, navController) }
+        //floatingActionButton = { FloatingButton() },
+        bottomBar = { MenuInferior(navController) }
+
+
     )
 }
 
 @Composable
 fun ConteudoDaPaginaDois(modifier: Modifier) {
     Column(
-        modifier = modifier.fillMaxSize(), // Use o modifier passado como parâmetro
+        modifier = modifier
+            .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

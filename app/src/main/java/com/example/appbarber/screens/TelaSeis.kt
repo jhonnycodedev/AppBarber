@@ -11,27 +11,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.example.appbarber.components.MenuInferior
+import com.example.appbarber.components.BarberBottomBar
+
 import com.example.appbarber.components.MenuSuperior
 
 @Composable
-fun TelaConta(state: DrawerState, navController: NavController){
+fun TelaSeis(state: DrawerState){
     Scaffold(
         topBar = { MenuSuperior(state) },
-        content = { p -> ConteudoDaPaginaConta(Modifier.padding(p)) },
-        bottomBar = { MenuInferior(state, navController) }
+        content = { p -> ConteudoDaPaginaSeis(Modifier.padding(p)) },
+        //floatingActionButton = { FloatingButton() },
+        bottomBar = { BarberBottomBar() }
     )
 }
 
 @Composable
-fun ConteudoDaPaginaConta(modifier: Modifier) {
+fun ConteudoDaPaginaSeis(modifier: Modifier) {
     Column(
         modifier = modifier.fillMaxSize(), // Use o modifier passado como parâmetro
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Tela Conta", fontSize = 50.sp) // Corrigir o texto para "Tela Conta"
+        Text(text = "Favoritos", fontSize = 50.sp) // Corrigir o texto para "Tela Conta"
     }
 }
 

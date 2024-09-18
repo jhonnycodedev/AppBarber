@@ -13,16 +13,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.appbarber.components.BarberBottomBar
 import com.example.appbarber.components.MenuInferior
 import com.example.appbarber.components.MenuSuperior
 
 
 @Composable
-fun TelaTres(state: DrawerState, navController:NavController){
+fun TelaTres(state: DrawerState){
     Scaffold(
         topBar = { MenuSuperior(state) },
         content = { p -> ConteudoDaPaginaTres(Modifier.padding(p)) },
-        bottomBar = { MenuInferior(state, navController) }
+        //floatingActionButton = { FloatingButton() },
+        bottomBar = { BarberBottomBar() }
     )
 }
 

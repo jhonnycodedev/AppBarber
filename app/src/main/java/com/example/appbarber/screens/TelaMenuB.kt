@@ -6,6 +6,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.Place
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Store
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -15,22 +16,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.example.appbarber.components.MenuInferior
-import com.example.appbarber.components.MenuSuperior
 
 @Composable
-fun TelaAgendamento(state: DrawerState, navController: NavController) {
+fun TelaMenuB(modifier: Modifier) {
     Scaffold(
-        content = { innerPadding ->
-            ConteudoDaPaginaAgendamento(Modifier.padding(innerPadding))
-        },
-        bottomBar = { MenuInferior(state, navController) }
+        content = { p -> ConteudoDaPaginaMenuB(modifier.padding(p)) },
     )
 }
 
 @Composable
-fun ConteudoDaPaginaAgendamento(modifier: Modifier) {
+fun ConteudoDaPaginaMenuB(modifier: Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -48,34 +43,23 @@ fun ConteudoDaPaginaAgendamento(modifier: Modifier) {
 
         // Caixa de Pesquisa
         val searchText = remember { mutableStateOf("") }
-        BasicTextField(
+        TextField(
             value = searchText.value,
             onValueChange = { searchText.value = it },
-            decorationBox = { innerTextField ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                        .border(1.dp, Color.Gray, MaterialTheme.shapes.medium)
-                        .padding(8.dp)
-                ) {
-                    if (searchText.value.isEmpty()) {
-                        Text(text = "Pesquisar...", color = Color.Gray)
-                    }
-                    innerTextField()
-                }
-            },
+            label = { Text("Pesquisar...") }, // Isso cuida do placeholder
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) }, // Ícone de pesquisa
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp)
         )
+
 
         // Botões de Classificação
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceAround
         ) {
             ClassificationButton("Nome", Icons.Default.Store)
             ClassificationButton("Cidade", Icons.Default.LocationCity)
@@ -83,7 +67,7 @@ fun ConteudoDaPaginaAgendamento(modifier: Modifier) {
         }
     }
 }
-/*
+
 @Composable
 fun ClassificationButton(text: String, icon: ImageVector) {
     Button(
@@ -103,4 +87,4 @@ fun ClassificationButton(text: String, icon: ImageVector) {
         Text(text)
     }
 }
-*/
+
