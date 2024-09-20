@@ -16,23 +16,24 @@ import com.example.appbarber.components.BarberBottomBar
 import com.example.appbarber.components.MenuInferior
 import com.example.appbarber.components.MenuSuperior
 
+
 @Composable
-fun TelaQuatro(state: DrawerState) {
+fun TelaMeusAcessos(state: DrawerState){
     Scaffold(
         topBar = { MenuSuperior(state) },
-        content = { p -> ConteudoDaPaginaQuatro(Modifier.padding(p)) },
+        content = { p -> ConteudoMeusAcessos(Modifier.padding(p)) },
         //floatingActionButton = { FloatingButton() },
-        bottomBar = { BarberBottomBar() }
+
     )
 }
 
 @Composable
-fun ConteudoDaPaginaQuatro(modifier: Modifier) {
+fun ConteudoMeusAcessos(modifier: Modifier) {
     Column(
         modifier = modifier.fillMaxSize(), // Use o modifier passado como parâmetro
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Cartões", fontSize = 50.sp)
+        Text(text = "Tela Meus Acessos", fontSize = 50.sp)
     }
 }

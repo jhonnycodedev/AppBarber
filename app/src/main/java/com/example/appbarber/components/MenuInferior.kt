@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
 import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,54 +25,42 @@ import com.example.appbarber.screens.TelaRotasBottom
 
 @Composable
 fun MenuInferior(navController: NavController) {
-    // Obtém a navegação atual
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
-
     NavigationBar {
         NavigationBarItem(
-            selected = currentRoute == TelaRotasBottom.TelaMenuA,
+            selected = true,
             onClick = {
-                navController.navigate(TelaRotasBottom.TelaMenuA) {
-                    // Use popUpTo e launchSingleTop para evitar múltiplas instâncias
-                    popUpTo(TelaRotasBottom.TelaMenuA) { inclusive = true }
-                    launchSingleTop = true
-                }
+                navController.navigate(TelaRotasBottom.TelaInicio)
             },
             icon = {
-                Icon(
-                    imageVector = Icons.Filled.Home,
+                Icon(imageVector = Icons.Filled.Home,
                     contentDescription = "Inicio",
-                    modifier = Modifier.size(40.dp)
-                )
-            }
+                    modifier = Modifier.size(40.dp))
+            },
+            label = { Text(text = "Inicio") }
         )
         NavigationBarItem(
-            selected = currentRoute == TelaRotasBottom.TelaMenuB,
+            selected = false,
             onClick = {
-                navController.navigate(TelaRotasBottom.TelaMenuB) {
-                    popUpTo(TelaRotasBottom.TelaMenuB) { inclusive = true }
-                    launchSingleTop = true
-                }
+                navController.navigate(TelaRotasBottom.TelaSearchBarber)
             },
             icon = {
-                Icon(
-                    imageVector = Icons.Filled.Search,
+                Icon(imageVector = Icons.Filled.Search,
                     contentDescription = "Pesquisar",
-                    modifier = Modifier.size(40.dp)
-                )
-            }
+                    modifier = Modifier.size(40.dp))
+            },
+            label = { Text(text = "Pesquisar") }
         )
         NavigationBarItem(
-            selected = currentRoute == TelaRotasBottom.TelaMenuC,
-            onClick = { navController.navigate(TelaRotasBottom.TelaMenuC) },
+            selected = false,
+            onClick = {
+                navController.navigate(TelaRotasBottom.TelaAgendamento)
+            },
             icon = {
-                Icon(
-                    imageVector = Icons.Filled.CalendarMonth,
-                    contentDescription = "Calendário",
-                    modifier = Modifier.size(40.dp)
-                )
-            }
+                Icon(imageVector = Icons.Filled.CalendarMonth,
+                    contentDescription = "Agendamento",
+                    modifier = Modifier.size(40.dp))
+            },
+            label = { Text(text = "Agendamento") }
         )
     }
 }
@@ -94,6 +83,7 @@ fun BarberBottomBar(){
                 contentDescription = "e",
                 modifier = Modifier.size(40.dp))
             Spacer(modifier = Modifier.width(50.dp))
+
             Icon(imageVector = Icons.Filled.CalendarMonth,
                 contentDescription = "c",
                 modifier = Modifier.size(40.dp))

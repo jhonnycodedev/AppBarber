@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.ManageAccounts
 import androidx.compose.material.icons.filled.Payment
@@ -37,12 +38,12 @@ import com.example.appbarber.R
 import kotlinx.coroutines.launch
 
 object BarberAppRotas {
-    const val TELA_UM = "navegação"
-    const val TELA_DOIS = "segurança"
-    const val TELA_TRES = "meus acessos"
-    const val TELA_QUATRO = "cartoes"
-    const val TELA_CINCO = "conta"
-    const val TELA_SEIS = "favoritos"
+    const val MENU_ROTAS = "navegação"
+    const val TELA_SEGURANCA = "segurança"
+    const val TELA_MEUS_ACESSOS = "meus acessos"
+    const val TELA_PAYMENTS = "cartoes"
+    const val TELA_ACCOUNT_USER = "conta"
+    const val TELA_FAVORITOS = "favoritos"
 }
 
 @Preview
@@ -53,14 +54,14 @@ fun PrincipalPage() {
 
     val navController = rememberNavController()
     val currentBack by navController.currentBackStackEntryAsState()
-    val rotaAtual = currentBack?.destination?.route ?: BarberAppRotas.TELA_UM
+    val rotaAtual = currentBack?.destination?.route ?: BarberAppRotas.MENU_ROTAS
 
-    val telaUmSelect = rotaAtual == BarberAppRotas.TELA_UM
-    val telaDoisSelect = rotaAtual == BarberAppRotas.TELA_DOIS
-    val telaTresSelect = rotaAtual == BarberAppRotas.TELA_TRES
-    val telaQuatroSelect = rotaAtual == BarberAppRotas.TELA_QUATRO
-    val telaCincoSelect = rotaAtual == BarberAppRotas.TELA_CINCO
-    val telaSeisSelect = rotaAtual == BarberAppRotas.TELA_SEIS
+    val telaUmSelect = rotaAtual == BarberAppRotas.MENU_ROTAS
+    val SecuritySelect = rotaAtual == BarberAppRotas.TELA_SEGURANCA
+    val AcessSelect = rotaAtual == BarberAppRotas.TELA_MEUS_ACESSOS
+    val PaymentsSelect = rotaAtual == BarberAppRotas.TELA_PAYMENTS
+    val AccountSelect = rotaAtual == BarberAppRotas.TELA_ACCOUNT_USER
+    val FavoriteSelect = rotaAtual == BarberAppRotas.TELA_FAVORITOS
 
 
     ModalNavigationDrawer(
@@ -74,20 +75,32 @@ fun PrincipalPage() {
             ) {
                 Spacer(modifier = Modifier.height(70.dp))
 
-                TextButton(
+                TextButton( colors = ButtonDefaults.buttonColors(
+                    containerColor = getBack(telaUmSelect)
+                ),
                     onClick = {
-                        navController.navigate(BarberAppRotas.TELA_UM)
+                        navController.navigate(BarberAppRotas.MENU_ROTAS)
                         coroutineScope.launch { state.close() }
                     }) {
+                    Icon(
+                        imageVector = Icons.Filled.Home,
+                        contentDescription = "Inicio",
+                        modifier = Modifier.size(30.dp),
+                        tint = getTint(telaUmSelect))
 
+                    Text(
+                        color = getTint(telaUmSelect),
+                        text = "Inicio", fontSize = 20.sp,
+                        modifier = Modifier.padding(8.dp)
+                    )
                 }
 
                 TextButton(
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = getBack(telaDoisSelect)
+                        containerColor = getBack(SecuritySelect)
                     ),
                     onClick = {
-                        navController.navigate(BarberAppRotas.TELA_DOIS)
+                        navController.navigate(BarberAppRotas.TELA_SEGURANCA)
                         coroutineScope.launch { state.close() }
                     }) {
 
@@ -95,10 +108,10 @@ fun PrincipalPage() {
                         imageVector = Icons.Filled.Lock,
                         contentDescription = "Segurança",
                         modifier = Modifier.size(30.dp),
-                        tint = getTint(telaDoisSelect))
+                        tint = getTint(SecuritySelect))
 
                     Text(
-                        color = getTint(telaDoisSelect),
+                        color = getTint(SecuritySelect),
                         text = "Segurança", fontSize = 20.sp,
                         modifier = Modifier.padding(8.dp)
                     )
@@ -106,10 +119,10 @@ fun PrincipalPage() {
 
 
                 TextButton( colors = ButtonDefaults.buttonColors(
-                    containerColor = getBack(telaTresSelect)
+                    containerColor = getBack(AcessSelect)
                 ),
                     onClick = {
-                        navController.navigate(BarberAppRotas.TELA_TRES)
+                        navController.navigate(BarberAppRotas.TELA_MEUS_ACESSOS)
                         coroutineScope.launch { state.close() }
                     }) {
 
@@ -118,20 +131,20 @@ fun PrincipalPage() {
                         imageVector = Icons.Filled.ManageAccounts,
                         contentDescription = "Meus Acessos",
                         modifier = Modifier.size(30.dp),
-                        tint = getTint(telaTresSelect))
+                        tint = getTint(AcessSelect))
 
                     Text(
-                        color = getTint(telaTresSelect),
+                        color = getTint(AcessSelect),
                         text = "Meus Acessos", fontSize = 20.sp,
                         modifier = Modifier.padding(8.dp)
                     )
                 }
 
                 TextButton( colors = ButtonDefaults.buttonColors(
-                    containerColor = getBack(telaQuatroSelect)
+                    containerColor = getBack(PaymentsSelect)
                 ),
                     onClick = {
-                        navController.navigate(BarberAppRotas.TELA_QUATRO)
+                        navController.navigate(BarberAppRotas.TELA_PAYMENTS)
                         coroutineScope.launch { state.close() }
                     }) {
 
@@ -140,20 +153,20 @@ fun PrincipalPage() {
                         imageVector = Icons.Filled.Payment,
                         contentDescription = "Cartões",
                         modifier = Modifier.size(30.dp),
-                        tint = getTint(telaQuatroSelect))
+                        tint = getTint(PaymentsSelect))
 
                     Text(
-                        color = getTint(telaQuatroSelect),
+                        color = getTint(PaymentsSelect),
                         text = "Cartões", fontSize = 20.sp,
                         modifier = Modifier.padding(8.dp)
                     )
                 }
 
                 TextButton( colors = ButtonDefaults.buttonColors(
-                    containerColor = getBack(telaCincoSelect)
+                    containerColor = getBack(AccountSelect)
                 ),
                     onClick = {
-                        navController.navigate(BarberAppRotas.TELA_CINCO)
+                        navController.navigate(BarberAppRotas.TELA_ACCOUNT_USER)
                         coroutineScope.launch { state.close() }
                     }) {
 
@@ -162,10 +175,10 @@ fun PrincipalPage() {
                         imageVector = Icons.Filled.AccountCircle,
                         contentDescription = "Conta",
                         modifier = Modifier.size(30.dp),
-                        tint = getTint(telaCincoSelect))
+                        tint = getTint(AccountSelect))
 
                     Text(
-                        color = getTint(telaCincoSelect),
+                        color = getTint(AccountSelect),
                         text = "Conta", fontSize = 20.sp,
                         modifier = Modifier.padding(8.dp)
                     )
@@ -173,10 +186,10 @@ fun PrincipalPage() {
 
                 TextButton(
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = getBack(telaSeisSelect)
+                        containerColor = getBack(FavoriteSelect)
                     ),
                     onClick = {
-                        navController.navigate(BarberAppRotas.TELA_SEIS)
+                        navController.navigate(BarberAppRotas.TELA_FAVORITOS)
                         coroutineScope.launch { state.close() }
                     }) {
 
@@ -184,10 +197,10 @@ fun PrincipalPage() {
                         imageVector = Icons.Filled.FavoriteBorder,
                         contentDescription = "Favoritos",
                         modifier = Modifier.size(30.dp),
-                        tint = getTint(telaSeisSelect))
+                        tint = getTint(FavoriteSelect))
 
                     Text(
-                        color = getTint(telaSeisSelect),
+                        color = getTint(FavoriteSelect),
                         text = "Favoritos", fontSize = 20.sp,
                         modifier = Modifier.padding(8.dp)
                     )
@@ -209,7 +222,6 @@ fun PrincipalPage() {
                     )
                 }
 
-
             }
         },
         content = {
@@ -225,25 +237,25 @@ private fun BarberNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = BarberAppRotas.TELA_UM
+        startDestination = BarberAppRotas.MENU_ROTAS
     ) {
-        composable(BarberAppRotas.TELA_UM) {
-            TelaUm(state)
+        composable(BarberAppRotas.MENU_ROTAS) {
+            MenuRotas(state)
         }
-        composable(BarberAppRotas.TELA_DOIS) {
-            TelaDois(state)
+        composable(BarberAppRotas.TELA_SEGURANCA) {
+            TelaSeguranca(state)
         }
-        composable(BarberAppRotas.TELA_TRES) {
-            TelaTres(state)
+        composable(BarberAppRotas.TELA_MEUS_ACESSOS) {
+            TelaMeusAcessos(state)
         }
-        composable(BarberAppRotas.TELA_QUATRO) {
-            TelaQuatro(state)
+        composable(BarberAppRotas.TELA_PAYMENTS) {
+            TelaPayments(state)
         }
-        composable(BarberAppRotas.TELA_CINCO) {
-            TelaCinco(state)
+        composable(BarberAppRotas.TELA_ACCOUNT_USER) {
+            TelaAccountUser(state)
         }
-        composable(BarberAppRotas.TELA_SEIS) {
-            TelaSeis(state)
+        composable(BarberAppRotas.TELA_FAVORITOS) {
+            TelaFavoritos(state)
         }
 
     }

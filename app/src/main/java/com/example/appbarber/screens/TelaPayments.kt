@@ -10,31 +10,29 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.appbarber.components.BarberBottomBar
 import com.example.appbarber.components.MenuInferior
 import com.example.appbarber.components.MenuSuperior
 
-
 @Composable
-fun TelaTres(state: DrawerState){
+fun TelaPayments(state: DrawerState) {
     Scaffold(
         topBar = { MenuSuperior(state) },
-        content = { p -> ConteudoDaPaginaTres(Modifier.padding(p)) },
+        content = { p -> ConteudoDaPayments(Modifier.padding(p)) },
         //floatingActionButton = { FloatingButton() },
-        bottomBar = { BarberBottomBar() }
+
     )
 }
 
 @Composable
-fun ConteudoDaPaginaTres(modifier: Modifier) {
+fun ConteudoDaPayments(modifier: Modifier) {
     Column(
         modifier = modifier.fillMaxSize(), // Use o modifier passado como parâmetro
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Meus Acessos", fontSize = 50.sp)
+        Text(text = "Cartões", fontSize = 50.sp)
     }
 }

@@ -10,25 +10,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.appbarber.components.MenuSuperior
 
 
 @Composable
-fun TelaMenuC(modifier: Modifier) {
+fun TelaAgendamento(state: DrawerState, bottonNavBar: @Composable ()-> Unit){
     Scaffold(
-        content = { p -> ConteudoDaPaginaMenuC(modifier.padding(p)) },
-        floatingActionButton = { FloatingButton(onClick = { /* Ação */ }) }
+        //topBar = { MenuSuperior(state) },
+        content = { iPad -> iPad
+            Column (
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "Tela Agendamento", fontSize = 50.sp)
+            }
+        },
+        //floatingActionButton = { FloatingButton() },
+        bottomBar = { bottonNavBar() }
     )
-}
-
-@Composable
-fun ConteudoDaPaginaMenuC(modifier: Modifier) {
-    Column(
-        modifier = modifier.fillMaxSize(), // Use o modifier passado como parâmetro
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Tela Menu C", fontSize = 50.sp)
-    }
 }
 
 

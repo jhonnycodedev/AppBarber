@@ -13,27 +13,23 @@ import com.example.appbarber.components.MenuInferior
 import com.example.appbarber.components.MenuSuperior
 
 @Composable
-fun TelaDois(state: DrawerState) {
-
-    val navController = rememberNavController()
+fun TelaSeguranca(state: DrawerState) {
     Scaffold(
         topBar = { MenuSuperior(state) },
-        content = { p -> ConteudoDaPaginaDois(Modifier.padding(p)) },
-        //floatingActionButton = { FloatingButton() },
-        bottomBar = { MenuInferior(navController) }
-
+        content = { p -> ConteudoTelaSeguranca(Modifier.padding(p)) },
 
     )
 }
 
+
 @Composable
-fun ConteudoDaPaginaDois(modifier: Modifier) {
+fun ConteudoTelaSeguranca(modifier: Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Segurança", fontSize = 50.sp)
+        Text(text = "Tela Seguranca", fontSize = 50.sp)
     }
 }
