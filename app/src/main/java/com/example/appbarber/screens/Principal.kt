@@ -48,7 +48,7 @@ object BarberAppRotas {
 
 @Preview
 @Composable
-fun PrincipalPage() {
+fun PrincipalPage(onLogout: () -> Unit) {
     val state = rememberDrawerState(initialValue = DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
 
@@ -210,7 +210,7 @@ fun PrincipalPage() {
 
                 TextButton(
                     onClick = {
-                        navController.navigate("login_screen")
+                        onLogout()
                         coroutineScope.launch { state.close() }
                     }
                 ) {
@@ -273,5 +273,9 @@ fun getBack(selected: Boolean): Color {
 }
 
 
-
+@Preview(showBackground = true)
+@Composable
+fun PreviewPrincipal() {
+    TelaSearchBarber(state = DrawerState(DrawerValue.Closed), bottonNavBar = { /* Empty content */ })
+}
 

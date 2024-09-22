@@ -66,7 +66,10 @@ dependencies {
     // Material Design Icons Extended (Versão Direta)
     implementation("androidx.compose.material:material-icons-extended:1.5.0")
     implementation(libs.play.services.nearby)
-    implementation(libs.androidx.navigation.compose) // Notação correta para Kotlin Script
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.core.ktx)
+    implementation(libs.generativeai) // Notação correta para Kotlin Script
 
     // Test Dependencies
     testImplementation(libs.junit)
@@ -78,4 +81,5 @@ dependencies {
     // Debug Dependencies
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
 }
