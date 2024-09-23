@@ -17,7 +17,7 @@ import androidx.compose.ui.res.colorResource
 @Composable
 fun TelaLogin(onLoginSuccess: () -> Unit) {
     // Definir as credenciais corretas
-    val correctEmail = "test@example.com"
+    val correctEmail = "teste"
     val correctPassword = "123"
 
     // Variáveis de estado para armazenar email, senha e a mensagem de erro

@@ -46,7 +46,7 @@ object BarberAppRotas {
     const val TELA_FAVORITOS = "favoritos"
 }
 
-@Preview
+
 @Composable
 fun PrincipalPage(onLogout: () -> Unit) {
     val state = rememberDrawerState(initialValue = DrawerValue.Closed)
