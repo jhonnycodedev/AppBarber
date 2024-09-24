@@ -40,7 +40,7 @@ fun ConteudoTelaSeguranca(modifier: Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Senhas de acesso", fontSize = 32.sp, modifier = Modifier.padding(bottom = 32.dp))
+        Text(text = "Senhas de acesso", fontSize = 20.sp, modifier = Modifier.padding(bottom = 32.dp))
 
         // Campo de senha atual com visualização
         OutlinedTextField(
