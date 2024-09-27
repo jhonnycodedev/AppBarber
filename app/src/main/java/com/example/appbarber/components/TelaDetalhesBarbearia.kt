@@ -1,3 +1,4 @@
+/*
 package com.example.appbarber.screens
 
 import android.annotation.SuppressLint
@@ -25,6 +26,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appbarber.R
 import com.example.appbarber.components.MenuSuperior
 
+// Definição da classe Barbearia
+data class Barbearia(val nome: String, val localizacao: String, val imageResId: Int)
+
+// Data class Servico (serviços oferecidos pela barbearia)
 data class Servico(val nome: String, val preco: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,7 +72,7 @@ fun TelaDetalhesBarbearia(barbearia: Barbearia, navController: NavController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Lista de serviços
+                // Lista de serviços oferecidos pela barbearia
                 val servicos = listOf(
                     Servico("Corte de cabelo", "R$ 50,00"),
                     Servico("Barba", "R$ 30,00"),
@@ -90,16 +95,18 @@ fun TelaDetalhesBarbearia(barbearia: Barbearia, navController: NavController) {
 @Composable
 fun ServicoItem(servico: Servico) {
     Card(
-        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Text(text = servico.nome, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            Text(text = servico.preco, fontSize = 16.sp, color = Color.Gray)
+            Text(text = "Nome", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Preco", fontSize = 16.sp, color = Color.Gray)
             Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { /* Agendar serviço */ }) {
+            Button(onClick = { /* Lógica para agendar serviço */ }) {
                 Text("Agendar")
             }
         }
@@ -114,3 +121,4 @@ fun PreviewTelaDetalhesBarbearia() {
         navController = rememberNavController()
     )
 }
+*/

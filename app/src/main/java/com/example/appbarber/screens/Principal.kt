@@ -268,7 +268,7 @@ fun getTint(selected: Boolean): Color {
 }
 
 fun getBack(selected: Boolean): Color {
-    return if (selected) Color.Yellow
+    return if (selected) Color.White
     else Color.Transparent
 }
 

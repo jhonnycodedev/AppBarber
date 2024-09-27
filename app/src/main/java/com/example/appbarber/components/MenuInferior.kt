@@ -57,7 +57,7 @@ fun MenuInferior(navController: NavController) {
             },
             icon = {
                 Icon(imageVector = Icons.Filled.CalendarMonth,
-                    contentDescription = "Agendamento",
+                    contentDescription = "Agendamentos",
                     modifier = Modifier.size(40.dp))
             },
             label = { Text(text = "Agendamento") }
