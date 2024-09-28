@@ -12,10 +12,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.appbarber.screens.PrincipalPage
 import com.example.appbarber.screens.TelaLogin
+import com.google.firebase.FirebaseApp
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         setContent {
             MaterialTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {

@@ -69,7 +69,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.firebase.auth.ktx)
     implementation(libs.core.ktx)
-    implementation(libs.generativeai) // Notação correta para Kotlin Script
+    implementation(libs.generativeai)
+    implementation(libs.firebase.firestore.ktx) // Notação correta para Kotlin Script
 
     // Test Dependencies
     testImplementation(libs.junit)
@@ -81,5 +82,6 @@ dependencies {
     // Debug Dependencies
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
 
 }

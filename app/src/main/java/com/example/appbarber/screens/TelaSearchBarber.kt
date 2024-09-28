@@ -23,10 +23,15 @@ import androidx.compose.ui.unit.sp
 import com.example.appbarber.R
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import com.example.appbarber.util.Barbearia
 
 
-// Dados do Barbeiro
-data class Barbeiro(val name: String, val location: String, val imageResId: Int)
+// Barbeiro agora implementa Identifiable
+data class Barbeiro(
+    override val name: String,
+    override val location: String,
+    override val imageResId: Int
+) : Barbearia
 
 @Composable
 fun TelaSearchBarber(state: DrawerState, bottonNavBar: @Composable () -> Unit) {

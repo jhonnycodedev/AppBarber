@@ -1,4 +1,4 @@
-/*
+
 package com.example.appbarber.screens
 
 import android.annotation.SuppressLint
@@ -17,36 +17,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.appbarber.R
-import com.example.appbarber.components.MenuSuperior
+import com.example.appbarber.components.ServicoItem
+import com.example.appbarber.util.Barbearia
+import com.example.appbarber.util.Servico
 
-// Definição da classe Barbearia
-data class Barbearia(val nome: String, val localizacao: String, val imageResId: Int)
 
-// Data class Servico (serviços oferecidos pela barbearia)
-data class Servico(val nome: String, val preco: String)
-
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaDetalhesBarbearia(barbearia: Barbearia, navController: NavController) {
     var isFavorito by remember { mutableStateOf(false) }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text(barbearia.nome) }) },
+        topBar = { TopAppBar(title = { Text(barbearia.name) }) },
         content = {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                // Logotipo maior
                 Image(
                     painter = painterResource(id = barbearia.imageResId),
                     contentDescription = null,
@@ -57,10 +48,9 @@ fun TelaDetalhesBarbearia(barbearia: Barbearia, navController: NavController) {
                         .padding(bottom = 16.dp)
                 )
 
-                // Botão de favoritos
                 IconButton(onClick = {
                     isFavorito = !isFavorito
-                    // Adicione lógica para gerenciar favoritos
+                    // Lógica para gerenciar o estado favorito (local)
                 }, modifier = Modifier.align(Alignment.CenterHorizontally)) {
                     Icon(
                         imageVector = if (isFavorito) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
@@ -72,10 +62,10 @@ fun TelaDetalhesBarbearia(barbearia: Barbearia, navController: NavController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Lista de serviços oferecidos pela barbearia
+                // Serviços da barbearia
                 val servicos = listOf(
-                    Servico("Corte de cabelo", "R$ 50,00"),
-                    Servico("Barba", "R$ 30,00"),
+                    com.example.appbarber.util.Servico("Corte de cabelo", "R$ 50,00"),
+                    com.example.appbarber.util.Servico("Barba", "R$ 30,00"),
                     Servico("Corte + Barba", "R$ 70,00")
                 )
 
@@ -91,34 +81,3 @@ fun TelaDetalhesBarbearia(barbearia: Barbearia, navController: NavController) {
         }
     )
 }
-
-@Composable
-fun ServicoItem(servico: Servico) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(text = "Nome", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            Text(text = "Preco", fontSize = 16.sp, color = Color.Gray)
-            Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { /* Lógica para agendar serviço */ }) {
-                Text("Agendar")
-            }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewTelaDetalhesBarbearia() {
-    TelaDetalhesBarbearia(
-        barbearia = Barbearia("Barbearia Premium", "Centro", R.drawable.barbeiro1),
-        navController = rememberNavController()
-    )
-}
-*/
