@@ -72,6 +72,8 @@ dependencies {
     implementation(libs.generativeai)
     implementation(libs.firebase.firestore.ktx) // Notação correta para Kotlin Script
 
+
+
     // Test Dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

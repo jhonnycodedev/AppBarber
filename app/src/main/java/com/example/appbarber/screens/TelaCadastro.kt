@@ -13,20 +13,16 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.appbarber.R
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun TelaLogin(navController: NavController, onLoginSuccess: () -> Unit) {
-    // Definir as credenciais corretas
-    val correctEmail = "teste"
-    val correctPassword = "123"
-
-    // Variáveis de estado para armazenar email, senha e a mensagem de erro
+fun TelaCadastro(onRegisterSuccess: () -> Unit) {
+    // Variáveis de estado para armazenar nome, email, senha e a mensagem de erro
+    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var errorMessage by remember { mutableStateOf("") }  // Mensagem de erro
+    var errorMessage by remember { mutableStateOf("") }
 
     Scaffold(
         content = { padding ->
@@ -45,16 +41,26 @@ fun TelaLogin(navController: NavController, onLoginSuccess: () -> Unit) {
                     painter = painterResource(id = R.drawable.logo3), // Substitua pelo nome da sua imagem
                     contentDescription = "Logotipo",
                     modifier = Modifier
-                        .size(300.dp) // Tamanho do logotipo
+                        .size(200.dp) // Tamanho do logotipo
                         .padding(bottom = 16.dp) // Espaçamento abaixo do logotipo
                 )
 
                 // Título
                 Text(
-                    text = "Bem-Vindo",
+                    text = "Criar Conta",
                     style = MaterialTheme.typography.headlineLarge,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
+
+                // Campo de Nome
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("Nome") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
 
                 // Campo de Email
                 OutlinedTextField(
@@ -87,14 +93,14 @@ fun TelaLogin(navController: NavController, onLoginSuccess: () -> Unit) {
                     )
                 }
 
-                // Botão de Login
+                // Botão de Cadastro
                 Button(
                     onClick = {
-                        if (email == correctEmail && password == correctPassword) {
+                        if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
                             errorMessage = "" // Limpa a mensagem de erro
-                            onLoginSuccess()
+                            onRegisterSuccess() // Chama a função de sucesso ao cadastrar
                         } else {
-                            errorMessage = "Credenciais inválidas" // Atualiza a mensagem de erro
+                            errorMessage = "Preencha todos os campos" // Exibe mensagem de erro
                         }
                     },
                     colors = ButtonDefaults.buttonColors(
@@ -103,25 +109,31 @@ fun TelaLogin(navController: NavController, onLoginSuccess: () -> Unit) {
                     ),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Entre")
+                    Text("Cadastrar")
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Botão de Voltar
                 TextButton(
                     onClick = {
-                        // Navega para a tela de cadastro
+                        // Aqui você pode adicionar lógica para navegar para outra tela, como login
                     }
                 ) {
                     Text(
                         color = Color.Blue,
-                        text = "Cadastre-se",
+                        text = "Já tem uma conta? Faça login",
                         fontSize = 12.sp,
                         modifier = Modifier.padding(16.dp)
                     )
                 }
-
             }
         }
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewTelaCadastro() {
+    TelaCadastro(onRegisterSuccess = {})
 }

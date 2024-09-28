@@ -24,7 +24,7 @@ fun TelaMeusAcessos(state: DrawerState) {
     Scaffold(
         topBar = { MenuSuperior(state) },
         content = { p -> ConteudoMeusAcessos(Modifier.padding(p)) },
-        bottomBar = { BarberBottomBar() }
+        //bottomBar = { BarberBottomBar() }
     )
 }
 

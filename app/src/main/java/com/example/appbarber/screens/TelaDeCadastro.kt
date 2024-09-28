@@ -1,5 +1,4 @@
 package com.example.appbarber.screens
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,16 +16,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appbarber.R
 
-@Composable
-fun TelaLogin(navController: NavController, onLoginSuccess: () -> Unit) {
-    // Definir as credenciais corretas
-    val correctEmail = "teste"
-    val correctPassword = "123"
 
-    // Variáveis de estado para armazenar email, senha e a mensagem de erro
+@Composable
+fun TelaDeCadastro(navController: NavController, onRegisterSuccess: () -> Unit) {
+    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var errorMessage by remember { mutableStateOf("") }  // Mensagem de erro
+    var errorMessage by remember { mutableStateOf("") }
 
     Scaffold(
         content = { padding ->
@@ -45,16 +41,26 @@ fun TelaLogin(navController: NavController, onLoginSuccess: () -> Unit) {
                     painter = painterResource(id = R.drawable.logo3), // Substitua pelo nome da sua imagem
                     contentDescription = "Logotipo",
                     modifier = Modifier
-                        .size(300.dp) // Tamanho do logotipo
+                        .size(200.dp) // Tamanho do logotipo
                         .padding(bottom = 16.dp) // Espaçamento abaixo do logotipo
                 )
 
                 // Título
                 Text(
-                    text = "Bem-Vindo",
+                    text = "Criar Conta",
                     style = MaterialTheme.typography.headlineLarge,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
+
+                // Campo de Nome
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("Nome") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
 
                 // Campo de Email
                 OutlinedTextField(
@@ -87,14 +93,14 @@ fun TelaLogin(navController: NavController, onLoginSuccess: () -> Unit) {
                     )
                 }
 
-                // Botão de Login
+                // Botão de Cadastro
                 Button(
                     onClick = {
-                        if (email == correctEmail && password == correctPassword) {
+                        if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
                             errorMessage = "" // Limpa a mensagem de erro
-                            onLoginSuccess()
+                            onRegisterSuccess() // Chama a função de sucesso ao cadastrar
                         } else {
-                            errorMessage = "Credenciais inválidas" // Atualiza a mensagem de erro
+                            errorMessage = "Preencha todos os campos" // Exibe mensagem de erro
                         }
                     },
                     colors = ButtonDefaults.buttonColors(
@@ -103,24 +109,24 @@ fun TelaLogin(navController: NavController, onLoginSuccess: () -> Unit) {
                     ),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Entre")
+                    Text("Cadastrar")
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Botão para voltar ao login
                 TextButton(
                     onClick = {
-                        // Navega para a tela de cadastro
+                        navController.navigate("tela_login")
                     }
                 ) {
                     Text(
                         color = Color.Blue,
-                        text = "Cadastre-se",
+                        text = "Já tem uma conta? Faça login",
                         fontSize = 12.sp,
                         modifier = Modifier.padding(16.dp)
                     )
                 }
-
             }
         }
     )

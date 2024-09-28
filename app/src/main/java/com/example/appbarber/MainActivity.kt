@@ -37,11 +37,11 @@ fun AppNavHost() {
         composable("login") {
             TelaLogin(onLoginSuccess = {
                 // Navegar para a tela principal após o login
-                navController.navigate("principal") {
+                navController.navigate("PrincipalPage") {
                     // Opcional: Limpar a pilha de navegação para evitar voltar à tela de login
                     popUpTo("login") { inclusive = true }
                 }
-            })
+            }
         }
         composable("principal") {
             PrincipalPage(
