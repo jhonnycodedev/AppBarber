@@ -1,92 +1,119 @@
 package com.example.appbarber.components
+
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
-import androidx.compose.material3.Icon
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
-import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.appbarber.screens.TelaRotasBottom
 
 @Composable
 fun MenuInferior(navController: NavController) {
+    // Obter o destino atual da navegação
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    // Definir a rota atual
+    val currentRoute = navBackStackEntry?.destination?.route
+
     NavigationBar {
+        // Item para TelaInicio
         NavigationBarItem(
-            selected = true,
+            selected = currentRoute == TelaRotasBottom.TelaInicio,
             onClick = {
-                navController.navigate(TelaRotasBottom.TelaInicio)
+                if (currentRoute != TelaRotasBottom.TelaInicio) {
+                    navController.navigate(TelaRotasBottom.TelaInicio)
+                }
             },
             icon = {
-                Icon(imageVector = Icons.Filled.Home,
+                Icon(
+                    imageVector = Icons.Filled.Home,
                     contentDescription = "Inicio",
-                    modifier = Modifier.size(40.dp))
+                    modifier = Modifier.size(40.dp)
+                )
             },
             label = { Text(text = "Inicio") }
         )
+
+        // Item para TelaSearchBarber
         NavigationBarItem(
-            selected = false,
+            selected = currentRoute == TelaRotasBottom.TelaSearchBarber,
             onClick = {
-                navController.navigate(TelaRotasBottom.TelaSearchBarber)
+                if (currentRoute != TelaRotasBottom.TelaSearchBarber) {
+                    navController.navigate(TelaRotasBottom.TelaSearchBarber)
+                }
             },
             icon = {
-                Icon(imageVector = Icons.Filled.Search,
+                Icon(
+                    imageVector = Icons.Filled.Search,
                     contentDescription = "Pesquisar",
-                    modifier = Modifier.size(40.dp))
+                    modifier = Modifier.size(40.dp)
+                )
             },
             label = { Text(text = "Pesquisar") }
         )
+
+        // Item para TelaAgendamento
         NavigationBarItem(
-            selected = false,
+            selected = currentRoute == TelaRotasBottom.TelaAgendamento,
             onClick = {
-                navController.navigate(TelaRotasBottom.TelaAgendamento)
+                if (currentRoute != TelaRotasBottom.TelaAgendamento) {
+                    navController.navigate(TelaRotasBottom.TelaAgendamento)
+                }
             },
             icon = {
-                Icon(imageVector = Icons.Filled.CalendarMonth,
+                Icon(
+                    imageVector = Icons.Filled.CalendarMonth,
                     contentDescription = "Agendamentos",
-                    modifier = Modifier.size(40.dp))
+                    modifier = Modifier.size(40.dp)
+                )
             },
             label = { Text(text = "Agendamento") }
         )
     }
 }
 
-
 @Composable
-fun BarberBottomBar(){
+fun BarberBottomBar() {
     BottomAppBar(
         containerColor = Color(0x52196F3)
     ) {
-        Row (
+        Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            Icon(imageVector = Icons.Filled.Home,
-                contentDescription = "d",
-                modifier = Modifier.size(40.dp))
+            Icon(
+                imageVector = Icons.Filled.Home,
+                contentDescription = "Inicio",
+                modifier = Modifier.size(40.dp)
+            )
             Spacer(modifier = Modifier.width(50.dp))
-            Icon(imageVector = Icons.Filled.Search,
-                contentDescription = "e",
-                modifier = Modifier.size(40.dp))
+            Icon(
+                imageVector = Icons.Filled.Search,
+                contentDescription = "Pesquisar",
+                modifier = Modifier.size(40.dp)
+            )
             Spacer(modifier = Modifier.width(50.dp))
-
-            Icon(imageVector = Icons.Filled.CalendarMonth,
-                contentDescription = "c",
-                modifier = Modifier.size(40.dp))
+            Icon(
+                imageVector = Icons.Filled.CalendarMonth,
+                contentDescription = "Agendamento",
+                modifier = Modifier.size(40.dp)
+            )
         }
     }
 }

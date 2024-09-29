@@ -1,5 +1,6 @@
 package com.example.appbarber.screens
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -7,14 +8,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.compose.ui.graphics.Color
 import com.example.appbarber.R
+
 
 @Composable
 fun TelaLogin(navController: NavController, onLoginSuccess: () -> Unit) {
@@ -155,7 +158,7 @@ fun RegisterTextButton(onRegisterClick: () -> Unit) {
         Text(
             color = Color.Blue,
             text = "Cadastre-se",
-            fontSize = 15.sp,
+            fontSize = 12.sp,
             modifier = Modifier.padding(16.dp)
         )
     }
