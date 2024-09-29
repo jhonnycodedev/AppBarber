@@ -14,10 +14,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appbarber.R
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 
 @Composable
-fun TelaCadastro(onRegisterSuccess: () -> Unit) {
+fun TelaCadastro(navController: NavController, onRegisterSuccess: () -> Unit) {
     // Variáveis de estado para armazenar nome, email, senha e a mensagem de erro
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -117,7 +117,7 @@ fun TelaCadastro(onRegisterSuccess: () -> Unit) {
                 // Botão de Voltar
                 TextButton(
                     onClick = {
-                        // Aqui você pode adicionar lógica para navegar para outra tela, como login
+                        navController.navigate(TelaRotasBottom.TelaLogin)
                     }
                 ) {
                     Text(
@@ -130,10 +130,4 @@ fun TelaCadastro(onRegisterSuccess: () -> Unit) {
             }
         }
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewTelaCadastro() {
-    TelaCadastro(onRegisterSuccess = {})
 }

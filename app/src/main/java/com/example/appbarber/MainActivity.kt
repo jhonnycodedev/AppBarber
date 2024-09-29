@@ -6,23 +6,26 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.appbarber.screens.PrincipalPage
 import com.example.appbarber.screens.TelaLogin
+import com.example.appbarber.screens.TelaCadastro
+import com.example.appbarber.screens.TelaDeCadastro
 import com.google.firebase.FirebaseApp
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Inicializa o Firebase
         FirebaseApp.initializeApp(this)
+
+        // Define o conteúdo da atividade
         setContent {
             MaterialTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    AppNavHost()
+                    AppNavigation()
                 }
             }
         }
@@ -30,23 +33,41 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppNavHost() {
+fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(
+        navController = navController,
+        startDestination = "login" // Define a tela de login como ponto de partida
+    ) {
+        // Composable para TelaLogin
         composable("login") {
-            TelaLogin(onLoginSuccess = {
-                // Navegar para a tela principal após o login
-                navController.navigate("PrincipalPage") {
-                    // Opcional: Limpar a pilha de navegação para evitar voltar à tela de login
-                    popUpTo("login") { inclusive = true }
+            TelaLogin(
+                navController = navController,
+                onLoginSuccess = {
+                    navController.navigate("principal") {
+                        popUpTo("login") { inclusive = true }
+                    }
                 }
-            }
+            )
         }
+
+        // Composable para TelaCadastro
+        composable("cadastro") {
+            TelaDeCadastro(
+                navController = navController, // Passa o navController para a TelaCadastro
+                onRegisterSuccess = {
+                    navController.navigate("login") {
+                        popUpTo("cadastro") { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        // Composable para PrincipalPage (Tela principal após login)
         composable("principal") {
             PrincipalPage(
                 onLogout = {
-                    // Navegar de volta para a tela de login e limpar a pilha de navegação
                     navController.navigate("login") {
                         popUpTo("principal") { inclusive = true }
                     }
@@ -56,12 +77,4 @@ fun AppNavHost() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewAppNavHost() {
-    MaterialTheme {
-        Surface(color = MaterialTheme.colorScheme.background) {
-            AppNavHost()
-        }
-    }
-}
+

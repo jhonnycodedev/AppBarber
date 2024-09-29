@@ -1,4 +1,5 @@
 package com.example.appbarber.screens
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,12 +14,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.appbarber.R
-
 
 @Composable
 fun TelaDeCadastro(navController: NavController, onRegisterSuccess: () -> Unit) {
+    // Variáveis de estado para armazenar nome, email, senha e a mensagem de erro
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -114,10 +114,13 @@ fun TelaDeCadastro(navController: NavController, onRegisterSuccess: () -> Unit) 
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Botão para voltar ao login
+                // Botão de Voltar
                 TextButton(
                     onClick = {
-                        navController.navigate("tela_login")
+                        // Navegar de volta para a tela de login
+                        navController.navigate("login") {
+                            popUpTo("cadastro") { inclusive = true }
+                        }
                     }
                 ) {
                     Text(

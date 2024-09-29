@@ -38,11 +38,11 @@ fun MenuRotas(state: DrawerState) {
         }
         // Nova rota para Tela de Login
         composable(TelaRotasBottom.TelaLogin) {
-            TelaLogin(navController) { /* Lógica para login bem-sucedido */ }
+            TelaLogin(navController = navController) { /* Lógica para login bem-sucedido */ }
         }
         // Nova rota para Tela de Cadastro
         composable(TelaRotasBottom.TelaCadastro) {
-            TelaCadastro(navController) { /* Lógica para registro bem-sucedido */ }
+            TelaCadastro(navController = navController) { /* Lógica para registro bem-sucedido */ }
         }
     }
 }
