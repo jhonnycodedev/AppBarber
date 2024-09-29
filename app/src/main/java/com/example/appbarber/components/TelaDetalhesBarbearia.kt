@@ -1,5 +1,5 @@
 
-package com.example.appbarber.screens
+package com.example.appbarber.components
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -17,10 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.appbarber.components.ServicoItem
 import com.example.appbarber.util.Barbearia
 import com.example.appbarber.util.Servico
 
@@ -82,4 +80,3 @@ fun TelaDetalhesBarbearia(barbearia: Barbearia, navController: NavController) {
         }
     )
 }
-

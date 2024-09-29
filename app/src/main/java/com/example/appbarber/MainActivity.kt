@@ -11,7 +11,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.appbarber.screens.PrincipalPage
 import com.example.appbarber.screens.TelaLogin
-import com.example.appbarber.screens.TelaCadastro
 import com.example.appbarber.screens.TelaDeCadastro
 import com.google.firebase.FirebaseApp
 
@@ -76,5 +75,4 @@ fun AppNavigation() {
         }
     }
 }
-
 

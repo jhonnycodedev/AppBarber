@@ -273,9 +273,3 @@ fun getBack(selected: Boolean): Color {
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewPrincipal() {
-    TelaSearchBarber(state = DrawerState(DrawerValue.Closed), bottonNavBar = { /* Empty content */ })
-}
-

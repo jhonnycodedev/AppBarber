@@ -1,5 +1,6 @@
 package com.example.appbarber.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -88,6 +89,7 @@ fun MenuInferior(navController: NavController) {
     }
 }
 
+@SuppressLint("InvalidColorHexValue")
 @Composable
 fun BarberBottomBar() {
     BottomAppBar(

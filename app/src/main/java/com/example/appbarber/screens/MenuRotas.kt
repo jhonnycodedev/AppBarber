@@ -28,13 +28,13 @@ fun MenuRotas(state: DrawerState) {
         startDestination = TelaRotasBottom.TelaInicio
     ) {
         composable(TelaRotasBottom.TelaInicio) {
-            TelaInicio(state, { MenuInferior(navController) })
+            TelaInicio(state) { MenuInferior(navController) }
         }
         composable(TelaRotasBottom.TelaSearchBarber) {
             TelaSearchBarber(state) { MenuInferior(navController) }
         }
         composable(TelaRotasBottom.TelaAgendamento) {
-            TelaAgendamento(state, { MenuInferior(navController) })
+            TelaAgendamento(state) { MenuInferior(navController) }
         }
         // Nova rota para Tela de Login
         composable(TelaRotasBottom.TelaLogin) {
