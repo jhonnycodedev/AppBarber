@@ -1,12 +1,16 @@
 package com.example.appbarber.screens
 
+import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
@@ -23,36 +27,26 @@ import androidx.compose.ui.unit.sp
 import com.example.appbarber.R
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.navigation.NavController
 import com.example.appbarber.util.Barbearia
+import com.example.appbarber.util.Barbeiro
+import com.example.appbarber.util.originalBarbeiros
 
-
-// Barbeiro agora implementa Identifiable
-data class Barbeiro(
-    override val name: String,
-    override val location: String,
-    override val imageResId: Int
-) : Barbearia
 
 @Composable
-fun TelaSearchBarber(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
-    // Lista de Barbeiros para pré-exibir
-    val originalBarbeiros = listOf(
-        Barbeiro("Barbeiro chique no ultimo", "Batel", R.drawable.barbeiro1),
-        Barbeiro("Deuses da Navalha", "Colombo", R.drawable.logo1),
-        Barbeiro("Barbearia do Zé", "Piraquara", R.drawable.logo2),
-        Barbeiro("Corte & Cia", "Bairro Alto", R.drawable.logo4),
-        Barbeiro("Corte & Barba", "Pinhais", R.drawable.semfoto),
-        Barbeiro("Ai q gatuu..", "Tatuquara", R.drawable.logo5)
-    )
+fun TelaSearchBarber(state: DrawerState, navController: NavController, bottonNavBar: @Composable () -> Unit) {
+
+    val barbeiros = originalBarbeiros // Usando a lista do BarbeariasData.kt
 
     // Estados para a lista de barbeiros e o texto de pesquisa
-    var barbeiros by remember { mutableStateOf(originalBarbeiros) }
+    var filteredBarbeiros by remember { mutableStateOf(barbeiros) }
     var searchText by remember { mutableStateOf("") }
     var selectedCity by remember { mutableStateOf<String?>(null) }
 
-    // Função para filtrar barbeiros com base no texto de pesquisa e cidade selecionada
+
+    // Função para filtrar barbeiros
     fun filterBarbeiros() {
-        barbeiros = originalBarbeiros.filter { barbeiro ->
+        filteredBarbeiros = barbeiros.filter { barbeiro ->
             (searchText.isBlank() || barbeiro.name.contains(searchText, ignoreCase = true)) &&
                     (selectedCity == null || barbeiro.location == selectedCity)
         }
@@ -152,8 +146,8 @@ fun TelaSearchBarber(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    items(barbeiros) { barbeiro ->
-                        MessageCard(barbeiro)
+                    items(filteredBarbeiros) { barbeiro ->
+                        MessageCard(barbeiro, navController) // Passando o navController
                     }
                 }
             }
@@ -163,8 +157,16 @@ fun TelaSearchBarber(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
 }
 
 @Composable
-fun MessageCard(barbeiro: Barbeiro) {
-    Row(modifier = Modifier.padding(all = 10.dp)) {
+fun MessageCard(barbeiro: Barbeiro, navController: NavController) {
+    Row(
+        modifier = Modifier
+            .padding(all = 10.dp)
+            .clickable {
+                val barbeariaName = Uri.encode(barbeiro.name) // Encode para segurança
+                Log.d("BarbeariaClick", "Navegando para detalhes de: $barbeariaName")
+                navController.navigate("detalhes/$barbeariaName")
+            }
+    ) {
         Image(
             painter = painterResource(barbeiro.imageResId),
             contentDescription = null,
@@ -177,7 +179,8 @@ fun MessageCard(barbeiro: Barbeiro) {
 
         Column {
             Text(
-                text = barbeiro.name, fontSize = 20.sp,
+                text = barbeiro.name,
+                fontSize = 20.sp,
                 color = MaterialTheme.colorScheme.secondary,
                 style = MaterialTheme.typography.titleSmall
             )
@@ -186,7 +189,8 @@ fun MessageCard(barbeiro: Barbeiro) {
 
             Surface(shape = MaterialTheme.shapes.medium, shadowElevation = 1.dp) {
                 Text(
-                    text = barbeiro.location, fontSize = 16.sp,
+                    text = barbeiro.location,
+                    fontSize = 16.sp,
                     modifier = Modifier.padding(all = 4.dp),
                     style = MaterialTheme.typography.bodyMedium
                 )

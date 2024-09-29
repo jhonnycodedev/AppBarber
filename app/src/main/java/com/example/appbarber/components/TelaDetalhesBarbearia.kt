@@ -18,15 +18,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.example.appbarber.util.Barbearia
+import androidx.navigation.NavHostController
+import com.example.appbarber.util.Barbeiro
 import com.example.appbarber.util.Servico
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TelaDetalhesBarbearia(barbearia: Barbearia, navController: NavController) {
+fun TelaDetalhesBarbearia (barbearia: Barbeiro, navController: NavHostController) {
+
     var isFavorito by remember { mutableStateOf(false) }
 
     Scaffold(

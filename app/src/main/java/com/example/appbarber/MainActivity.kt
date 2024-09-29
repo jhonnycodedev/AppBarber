@@ -5,13 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.appbarber.components.TelaDetalhesBarbearia
 import com.example.appbarber.screens.PrincipalPage
 import com.example.appbarber.screens.TelaLogin
 import com.example.appbarber.screens.TelaDeCadastro
+import com.example.appbarber.util.originalBarbeiros
 import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
@@ -73,6 +76,19 @@ fun AppNavigation() {
                 }
             )
         }
+
+        composable("detalhes/{barbeariaName}") { backStackEntry ->
+            val barbeariaName = backStackEntry.arguments?.getString("barbeariaName")
+            val barbearia = originalBarbeiros.find { it.name == barbeariaName }
+            if (barbearia != null) {
+                TelaDetalhesBarbearia(barbearia, navController)
+            } else {
+                // Caso não encontre a barbearia
+                Text("Barbearia não encontrada")
+            }
+        }
+
+
     }
 }
 

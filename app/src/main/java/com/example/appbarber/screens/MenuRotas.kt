@@ -31,7 +31,7 @@ fun MenuRotas(state: DrawerState) {
             TelaInicio(state) { MenuInferior(navController) }
         }
         composable(TelaRotasBottom.TelaSearchBarber) {
-            TelaSearchBarber(state) { MenuInferior(navController) }
+            TelaSearchBarber(state, navController) { MenuInferior(navController) }
         }
         composable(TelaRotasBottom.TelaAgendamento) {
             TelaAgendamento(state) { MenuInferior(navController) }
