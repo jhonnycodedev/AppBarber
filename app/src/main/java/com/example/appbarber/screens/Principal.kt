@@ -35,6 +35,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.appbarber.R
+import com.example.appbarber.navigation.MenuRotas
 import kotlinx.coroutines.launch
 
 object BarberAppRotas {

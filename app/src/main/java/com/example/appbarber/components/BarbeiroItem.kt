@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.appbarber.util.Barbeiro
+import com.example.appbarber.data.Barbeiro
 
 @Composable
 fun BarbeiroItem(barbeiro: Barbeiro) {

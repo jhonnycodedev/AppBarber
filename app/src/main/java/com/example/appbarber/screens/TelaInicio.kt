@@ -19,11 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appbarber.R
 import com.example.appbarber.components.MenuSuperior
+import com.example.appbarber.data.Servico
 
-// Data class Servico (para representar um serviço)
-data class Servico(val name: String, val price: Double, val imageResId: Int)
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaInicio(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
     Scaffold(
@@ -35,12 +32,12 @@ fun TelaInicio(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
                     .padding(paddingValues)
             ) {
                 // Seção de Propagandas
-                SeçãoPropagandas(modifier = Modifier.weight(1f))
+                SectionPropagandas(modifier = Modifier.weight(1f))
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Seção Últimos Serviços Acessados
-                SeçãoUltimosServicos(modifier = Modifier.weight(1f))
+                SectionUltimosServicos(modifier = Modifier.weight(1f))
             }
         },
         bottomBar = { bottonNavBar() }
@@ -48,7 +45,7 @@ fun TelaInicio(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
 }
 
 @Composable
-fun SeçãoPropagandas(modifier: Modifier = Modifier) {
+fun SectionPropagandas(modifier: Modifier = Modifier) {
     // Imagem de propaganda
     val propagandaImage: Painter = painterResource(id = R.drawable.propaganda)
     Box(
@@ -71,12 +68,12 @@ fun SeçãoPropagandas(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SeçãoUltimosServicos(modifier: Modifier = Modifier) {
+fun SectionUltimosServicos(modifier: Modifier = Modifier) {
     // Simulação de uma lista de últimos serviços acessados
     val servicosRecentes = listOf(
-        Servico("Corte de Cabelo", 50.0, R.drawable.logo2),
-        Servico("Barba e Cabelo", 70.0, R.drawable.logo2),
-        Servico("Sombrancelha", 30.0, R.drawable.logo2)
+        Servico("Corte de Cabelo", 50.0.toString(), R.drawable.logo2),
+        Servico("Barba e Cabelo", 70.0.toString(), R.drawable.logo2),
+        Servico("Sombrancelha", 30.0.toString(), R.drawable.logo2)
     )
 
     Column(
@@ -109,27 +106,29 @@ fun UltimoServicoItem(servico: Servico) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Imagem do serviço
-        Image(
-            painter = painterResource(servico.imageResId),
-            contentDescription = servico.name,
-            modifier = Modifier
-                .size(50.dp)
-                .clip(CircleShape)
-                .background(Color.LightGray)
-        )
+        servico.imageResId?.let { painterResource(it) }?.let {
+            Image(
+                painter = it,
+                contentDescription = servico.nome,
+                modifier = Modifier
+                    .size(50.dp)
+                    .clip(CircleShape)
+                    .background(Color.LightGray)
+            )
+        }
 
         Spacer(modifier = Modifier.width(16.dp))
 
         // Nome e preço do serviço
         Column {
             Text(
-                text = servico.name,
+                text = servico.nome,
                 fontSize = 18.sp,
                 color = MaterialTheme.colorScheme.secondary,
                 style = MaterialTheme.typography.bodyMedium
             )
             Text(
-                text = "R$ ${servico.price}",
+                text = "R$ ${servico.preco}",
                 fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.bodySmall

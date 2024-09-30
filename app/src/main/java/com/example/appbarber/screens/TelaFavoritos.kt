@@ -16,12 +16,13 @@ import androidx.compose.ui.unit.sp
 
 import com.example.appbarber.components.BarbeariaItem
 import com.example.appbarber.components.MenuSuperior
-import com.example.appbarber.util.Barbearia
+import com.example.appbarber.data.Barbeiro
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaFavoritos(state: DrawerState) {
-    val barbeariasFavoritas = remember { mutableStateListOf<Barbearia>() }
+    val barbeariasFavoritas = remember { mutableStateListOf<Barbeiro>() }
 
     Scaffold(
         topBar = { MenuSuperior(state) },
@@ -30,7 +31,7 @@ fun TelaFavoritos(state: DrawerState) {
 }
 
 @Composable
-fun ConteudoTelaFavoritos(modifier: Modifier, barbeariasFavoritas: SnapshotStateList<Barbearia>) {
+fun ConteudoTelaFavoritos(modifier: Modifier, barbeariasFavoritas: SnapshotStateList<Barbeiro>) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -47,8 +48,8 @@ fun ConteudoTelaFavoritos(modifier: Modifier, barbeariasFavoritas: SnapshotState
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
-                items(barbeariasFavoritas) { barbearia ->
-                    BarbeariaItem(barbearia) { /* Ação de favoritar */ }
+                items(barbeariasFavoritas) { Barbeiro ->
+                    BarbeariaItem(Barbeiro) { /* Ação de favoritar */ }
                 }
             }
         }

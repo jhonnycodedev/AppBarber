@@ -10,8 +10,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appbarber.R
-import com.example.appbarber.components.BarberBottomBar
-import com.example.appbarber.components.MenuInferior
 import com.example.appbarber.components.MenuSuperior
 
 @Composable

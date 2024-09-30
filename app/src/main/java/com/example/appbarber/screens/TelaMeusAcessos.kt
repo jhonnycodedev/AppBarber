@@ -13,10 +13,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import com.example.appbarber.R
-import com.example.appbarber.components.BarberBottomBar
-import com.example.appbarber.components.MenuInferior
 import com.example.appbarber.components.MenuSuperior
 
 @Composable

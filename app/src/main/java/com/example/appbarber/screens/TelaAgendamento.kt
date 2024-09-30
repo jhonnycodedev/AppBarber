@@ -14,28 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appbarber.R
-import androidx.compose.material3.DrawerState
-import androidx.compose.material3.DrawerValue
-import androidx.compose.runtime.remember
-import com.example.appbarber.components.MenuSuperior
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class Agendamento(
-    val name: String,
-    val serviceValue: Double,
-    val date: Date,
-    val imageResId: Int
-)
+data class Agendamento(val name: String, val serviceValue: Double, val date: Date, val imageResId: Int)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaAgendamento(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
-    // Lista simulada de agendamentos
     val agendamentos = remember {
         mutableStateListOf(
             Agendamento("Barbearia do Zé", 50.0, Date(), R.drawable.logo2),
@@ -45,14 +34,11 @@ fun TelaAgendamento(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
     }
 
     Scaffold(
-        //topBar = { MenuSuperior(state) },
         content = { paddingValues ->
             ConteudoTelaAgendamento(
                 modifier = Modifier.padding(paddingValues),
                 agendamentos = agendamentos,
-                onDelete = { agendamento ->
-                    agendamentos.remove(agendamento) // Excluir o agendamento da lista
-                }
+                onDelete = { agendamento -> agendamentos.remove(agendamento) }
             )
         },
         bottomBar = { bottonNavBar() }
@@ -63,7 +49,7 @@ fun TelaAgendamento(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
 fun ConteudoTelaAgendamento(
     modifier: Modifier,
     agendamentos: List<Agendamento>,
-    onDelete: (Agendamento) -> Unit // Função chamada ao clicar na lixeira
+    onDelete: (Agendamento) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -80,17 +66,13 @@ fun ConteudoTelaAgendamento(
 }
 
 @Composable
-fun AgendamentoItem(
-    agendamento: Agendamento,
-    onDelete: (Agendamento) -> Unit
-) {
+fun AgendamentoItem(agendamento: Agendamento, onDelete: (Agendamento) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Imagem da barbearia
         Image(
             painter = painterResource(agendamento.imageResId),
             contentDescription = null,
@@ -103,7 +85,6 @@ fun AgendamentoItem(
         Spacer(modifier = Modifier.width(16.dp))
 
         Column(modifier = Modifier.weight(1f)) {
-            // Nome da barbearia
             Text(
                 text = agendamento.name,
                 fontSize = 20.sp,
@@ -111,35 +92,28 @@ fun AgendamentoItem(
                 style = MaterialTheme.typography.titleSmall
             )
             Spacer(modifier = Modifier.height(4.dp))
-
-            // Valor do serviço
             Text(
                 text = "R$ ${agendamento.serviceValue}",
                 fontSize = 16.sp,
                 style = MaterialTheme.typography.bodyMedium
             )
 
-            // Data do agendamento formatada
-            val dateFormatter = remember { SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) }
+            val sdf = remember { SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) }
             Text(
-                text = "Data: ${dateFormatter.format(agendamento.date)}",
+                text = sdf.format(agendamento.date),
                 fontSize = 14.sp,
                 style = MaterialTheme.typography.bodySmall
             )
         }
 
-        Spacer(modifier = Modifier.width(16.dp))
-
-        // Ícone de lixeira para deletar o agendamento
         Icon(
             imageVector = Icons.Default.Delete,
-            contentDescription = "Excluir agendamento",
-            tint = Color.Red,
+            contentDescription = "Delete Agendamento",
             modifier = Modifier
-                .size(24.dp)
-                .clickable { onDelete(agendamento) } // Ação ao clicar
+                .size(32.dp)
+                .clickable { onDelete(agendamento) }
+                .padding(8.dp),
+            tint = Color.Red
         )
-
     }
 }
-

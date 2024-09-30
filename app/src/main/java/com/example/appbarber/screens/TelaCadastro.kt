@@ -13,8 +13,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.appbarber.R
 import androidx.navigation.NavController
+import com.example.appbarber.R
 
 @Composable
 fun TelaCadastro(navController: NavController, onRegisterSuccess: () -> Unit) {
@@ -117,7 +117,10 @@ fun TelaCadastro(navController: NavController, onRegisterSuccess: () -> Unit) {
                 // Botão de Voltar
                 TextButton(
                     onClick = {
-                        navController.navigate(TelaRotasBottom.TelaLogin)
+                        // Navegar de volta para a tela de login
+                        navController.navigate("login") {
+                            popUpTo("cadastro") { inclusive = true }
+                        }
                     }
                 ) {
                     Text(

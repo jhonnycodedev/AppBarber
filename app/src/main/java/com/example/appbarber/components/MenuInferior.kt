@@ -23,7 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.appbarber.screens.TelaRotasBottom
+import com.example.appbarber.navigation.TelaRotasBottom
+
 
 @Composable
 fun MenuInferior(navController: NavController) {

@@ -18,20 +18,24 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import com.example.appbarber.util.Barbeiro
-import com.example.appbarber.util.Servico
+import androidx.navigation.NavController
+import com.example.appbarber.data.Barbeiro
+
+import com.example.appbarber.data.Servico
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
+
+
 @Composable
-fun TelaDetalhesBarbearia (barbearia: Barbeiro, navController: NavHostController) {
+fun TelaDetalhesBarbearia (barbeiro: Barbeiro, navController: NavController) {
 
     var isFavorito by remember { mutableStateOf(false) }
 
+
     Scaffold(
-        topBar = { TopAppBar(title = { Text(barbearia.name) }) },
+        topBar = { TopAppBar(title = { Text(barbeiro.name) }) },
         content = {
             Column(
                 modifier = Modifier
@@ -39,7 +43,7 @@ fun TelaDetalhesBarbearia (barbearia: Barbeiro, navController: NavHostController
                     .padding(16.dp)
             ) {
                 Image(
-                    painter = painterResource(id = barbearia.imageResId),
+                    painter = painterResource(id = barbeiro.imageResId),
                     contentDescription = null,
                     modifier = Modifier
                         .size(150.dp)
@@ -64,8 +68,8 @@ fun TelaDetalhesBarbearia (barbearia: Barbeiro, navController: NavHostController
 
                 // Serviços da barbearia
                 val servicos = listOf(
-                    com.example.appbarber.util.Servico("Corte de cabelo", "R$ 50,00"),
-                    com.example.appbarber.util.Servico("Barba", "R$ 30,00"),
+                    Servico("Corte de cabelo", "R$ 50,00"),
+                    Servico("Barba", "R$ 30,00"),
                     Servico("Corte + Barba", "R$ 70,00")
                 )
 
@@ -81,3 +85,4 @@ fun TelaDetalhesBarbearia (barbearia: Barbeiro, navController: NavHostController
         }
     )
 }
+

@@ -11,10 +11,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.appbarber.components.TelaDetalhesBarbearia
+import com.example.appbarber.data.originalBarbeiros
 import com.example.appbarber.screens.PrincipalPage
+import com.example.appbarber.screens.TelaCadastro
 import com.example.appbarber.screens.TelaLogin
-import com.example.appbarber.screens.TelaDeCadastro
-import com.example.appbarber.util.originalBarbeiros
+
 import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
@@ -56,7 +57,7 @@ fun AppNavigation() {
 
         // Composable para TelaCadastro
         composable("cadastro") {
-            TelaDeCadastro(
+            TelaCadastro(
                 navController = navController, // Passa o navController para a TelaCadastro
                 onRegisterSuccess = {
                     navController.navigate("login") {
@@ -91,4 +92,3 @@ fun AppNavigation() {
 
     }
 }
-
