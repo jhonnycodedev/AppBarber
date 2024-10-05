@@ -6,7 +6,8 @@ import com.example.appbarber.R
 data class Barbeiro(
     val name: String,
     val location: String,
-    val imageResId: Int // ID da imagem de recurso (drawable)
+    val imageResId: Int, // ID da imagem de recurso (drawable)
+    var isFavorito: Boolean = false // Adiciona o campo para favoritar
 )
 
 // Lista de Barbeiros para pré-exibir

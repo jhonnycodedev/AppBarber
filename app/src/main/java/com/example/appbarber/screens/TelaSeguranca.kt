@@ -16,12 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.appbarber.R
-import com.example.appbarber.components.MenuSuperior
+import com.example.appbarber.components.TopAppBar
 
 @Composable
 fun TelaSeguranca(state: DrawerState) {
     Scaffold(
-        topBar = { MenuSuperior(state) },
+        topBar = { TopAppBar(state) },
         content = { p -> ConteudoTelaSeguranca(Modifier.padding(p)) },
     )
 }

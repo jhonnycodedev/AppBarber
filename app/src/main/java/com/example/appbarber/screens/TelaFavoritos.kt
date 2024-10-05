@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 import com.example.appbarber.components.BarbeariaItem
-import com.example.appbarber.components.MenuSuperior
+import com.example.appbarber.components.TopAppBar
 import com.example.appbarber.data.Barbeiro
 
 
@@ -25,7 +25,7 @@ fun TelaFavoritos(state: DrawerState) {
     val barbeariasFavoritas = remember { mutableStateListOf<Barbeiro>() }
 
     Scaffold(
-        topBar = { MenuSuperior(state) },
+        topBar = { TopAppBar(state) },
         content = { p -> ConteudoTelaFavoritos(Modifier.padding(p), barbeariasFavoritas) }
     )
 }

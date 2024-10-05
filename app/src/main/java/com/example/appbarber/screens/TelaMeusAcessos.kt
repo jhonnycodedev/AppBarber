@@ -14,12 +14,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.appbarber.R
-import com.example.appbarber.components.MenuSuperior
+import com.example.appbarber.components.TopAppBar
 
 @Composable
 fun TelaMeusAcessos(state: DrawerState) {
     Scaffold(
-        topBar = { MenuSuperior(state) },
+        topBar = { TopAppBar(state) },
         content = { p -> ConteudoMeusAcessos(Modifier.padding(p)) },
         //bottomBar = { BarberBottomBar() }
     )

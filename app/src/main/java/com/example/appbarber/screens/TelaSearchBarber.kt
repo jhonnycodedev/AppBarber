@@ -22,32 +22,22 @@ import com.example.appbarber.R
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.navigation.NavController
+import com.example.appbarber.components.BarbeiroItem
 import com.example.appbarber.data.originalBarbeiros
 
 
 @Composable
 fun TelaSearchBarber(state: DrawerState, navController: NavController, bottonNavBar: @Composable () -> Unit) {
 
-    val barbeiros = originalBarbeiros // Usando a lista do BarbeariasData.kt
-
-    // Estados para a lista de barbeiros e o texto de pesquisa
-    var filteredBarbeiros by remember { mutableStateOf(barbeiros) }
     var searchText by remember { mutableStateOf("") }
     var selectedCity by remember { mutableStateOf<String?>(null) }
 
-
-    // Função para filtrar barbeiros
-    fun filterBarbeiros() {
-        filteredBarbeiros = barbeiros.filter { barbeiro ->
-            (searchText.isBlank() || barbeiro.name.contains(searchText, ignoreCase = true)) &&
-                    (selectedCity == null || barbeiro.location == selectedCity)
-        }
+    val filteredBarbeiros = originalBarbeiros.filter { barbeiro ->
+        (searchText.isBlank() || barbeiro.name.contains(searchText, ignoreCase = true)) &&
+                (selectedCity == null || barbeiro.location == selectedCity)
     }
 
-    // Quando o texto de pesquisa ou a cidade selecionada mudarem, atualize a lista filtrada
-    LaunchedEffect(searchText, selectedCity) {
-        filterBarbeiros()
-    }
+
 
     Scaffold(
         content = { paddingValues ->
@@ -133,15 +123,12 @@ fun TelaSearchBarber(state: DrawerState, navController: NavController, bottonNav
                         }
                     }
                 }
-
-                // Lista de Barbeiros
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize()
-                ) {
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(filteredBarbeiros) { barbeiro ->
-                        MessageCard(barbeiro, navController) // Passando o navController
+                        BarbeiroItem(barbeiro, navController) // Passa o navController aqui
                     }
                 }
+
             }
         },
         bottomBar = { bottonNavBar() }

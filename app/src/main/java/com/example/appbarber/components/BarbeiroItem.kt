@@ -1,6 +1,5 @@
 package com.example.appbarber.components
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,15 +14,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.appbarber.data.Barbeiro
 
 @Composable
-fun BarbeiroItem(barbeiro: Barbeiro) {
+fun BarbeiroItem(barbeiro: Barbeiro, navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .clickable { /* Ação de clique para abrir detalhes */ },
+            .clickable {
+                // Navega para a tela de detalhes da barbearia
+                navController.navigate("detalhesBarbearia/${barbeiro.name}")
+            },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(

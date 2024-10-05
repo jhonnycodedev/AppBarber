@@ -20,16 +20,16 @@ import com.example.appbarber.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class Agendamento(val name: String, val serviceValue: Double, val date: Date, val imageResId: Int)
+data class Agendamento(val name: String, val serviceValue: String, val date: Date, val time: String, val imageResId: Int)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaAgendamento(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
     val agendamentos = remember {
         mutableStateListOf(
-            Agendamento("Barbearia do Zé", 50.0, Date(), R.drawable.logo2),
-            Agendamento("Corte Rápido", 40.0, Date(), R.drawable.logo2),
-            Agendamento("Barba e Cabelo", 70.0, Date(), R.drawable.logo2)
+            Agendamento("Barbearia do Zé", 50.00.toString(), Date(), "14:00", R.drawable.logo2),
+            Agendamento("Corte Rápido", 40.00.toString(), Date(), "15:00", R.drawable.logo2),
+            Agendamento("Barba e Cabelo", 70.00.toString(), Date(), "16:00", R.drawable.logo2)
         )
     }
 
@@ -58,9 +58,13 @@ fun ConteudoTelaAgendamento(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        agendamentos.forEach { agendamento ->
-            AgendamentoItem(agendamento = agendamento, onDelete = onDelete)
-            Spacer(modifier = Modifier.height(16.dp))
+        if (agendamentos.isEmpty()) {
+            Text(text = "Nenhum agendamento encontrado.", style = MaterialTheme.typography.bodyLarge)
+        } else {
+            agendamentos.forEach { agendamento ->
+                AgendamentoItem(agendamento = agendamento, onDelete = onDelete)
+                Spacer(modifier = Modifier.height(16.dp))
+            }
         }
     }
 }
@@ -100,7 +104,7 @@ fun AgendamentoItem(agendamento: Agendamento, onDelete: (Agendamento) -> Unit) {
 
             val sdf = remember { SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) }
             Text(
-                text = sdf.format(agendamento.date),
+                text = "${sdf.format(agendamento.date)} às ${agendamento.time}",
                 fontSize = 14.sp,
                 style = MaterialTheme.typography.bodySmall
             )

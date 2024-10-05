@@ -18,13 +18,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appbarber.R
-import com.example.appbarber.components.MenuSuperior
+import com.example.appbarber.components.TopAppBar
 import com.example.appbarber.data.Servico
 
 @Composable
 fun TelaInicio(state: DrawerState, bottonNavBar: @Composable () -> Unit) {
     Scaffold(
-        topBar = { MenuSuperior(state) },
+        topBar = { TopAppBar(state) },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -109,7 +109,7 @@ fun UltimoServicoItem(servico: Servico) {
         servico.imageResId?.let { painterResource(it) }?.let {
             Image(
                 painter = it,
-                contentDescription = servico.nome,
+                contentDescription = servico.name,
                 modifier = Modifier
                     .size(50.dp)
                     .clip(CircleShape)
@@ -122,13 +122,13 @@ fun UltimoServicoItem(servico: Servico) {
         // Nome e preço do serviço
         Column {
             Text(
-                text = servico.nome,
+                text = servico.name,
                 fontSize = 18.sp,
                 color = MaterialTheme.colorScheme.secondary,
                 style = MaterialTheme.typography.bodyMedium
             )
             Text(
-                text = "R$ ${servico.preco}",
+                text = "R$ ${servico.price}",
                 fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.bodySmall

@@ -1,10 +1,11 @@
 package com.example.appbarber.navigation
 
 object TelaRotasBottom {
-    val TelaInicio = "inicio"
-    val TelaSearchBarber = "pesquisa"
-    val TelaAgendamento = "agendamento"
-    val TelaDetalhesBarbearia = "detalhesBarbearia"
-    val TelaLogin = "login"
-    val TelaCadastro = "cadastro"
+    const val TelaFavoritos = "favoritos"
+    const val TelaInicio = "inicio"
+    const val TelaSearchBarber = "pesquisa"
+    const val TelaAgendamento = "agendamento"
+    const val TelaDetalhesBarbearia = "detalhesBarbearia"
+    const val TelaLogin = "login"
+    const val TelaCadastro = "cadastro"
 }
